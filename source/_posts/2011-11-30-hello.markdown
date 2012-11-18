@@ -1,0 +1,16 @@
+---
+layout: post
+title: "Hello, Octopress!"
+date: 2011-11-30 01:16
+comments: true
+categories: 
+---
+
+用 Octopress 搭建 blog 成功，使用起来感觉不错。
+
+### 测试一下代码显示
+
+``` common-lisp
+(defun hello-octopress ()
+  (format t "Hello, Octopres!"))
+```
