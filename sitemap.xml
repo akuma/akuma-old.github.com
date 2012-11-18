@@ -1,11 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://akuma.github.com/blog/2011/11/30/hello/</loc>
+        <lastmod>2012-11-18T15:53:37+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://akuma.github.com/blog/2011/12/01/da-jian-octopressbi-ji/</loc>
+        <lastmod>2012-11-18T15:53:37+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://akuma.github.com/blog/2012/11/12/svn-auto-props-pei-zhi/</loc>
+        <lastmod>2012-11-18T15:53:37+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://akuma.github.com/blog/archives/</loc>
-        <lastmod>2012-11-18T15:29:47+08:00</lastmod>
+        <lastmod>2012-11-18T15:53:37+08:00</lastmod>
     </url>
     <url>
         <loc>http://akuma.github.com/</loc>
-        <lastmod>2012-11-18T15:29:47+08:00</lastmod>
+        <lastmod>2012-11-18T15:53:37+08:00</lastmod>
     </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[Akuma's Blog]]></title>
   <link href="http://akuma.github.com/atom.xml" rel="self"/>
   <link href="http://akuma.github.com/"/>
-  <updated>2012-11-18T15:50:01+08:00</updated>
+  <updated>2012-11-18T15:55:07+08:00</updated>
   <id>http://akuma.github.com/</id>
   <author>
     <name><![CDATA[Akuma]]></name>
@@ -12,5 +12,171 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SVN Auto Props 配置]]></title>
+    <link href="http://akuma.github.com/blog/2012/11/12/svn-auto-props-pei-zhi/"/>
+    <updated>2012-11-12T19:20:00+08:00</updated>
+    <id>http://akuma.github.com/blog/2012/11/12/svn-auto-props-pei-zhi</id>
+    <content type="html"><![CDATA[<h3>常用的 Property</h3>
+
+<h5>svn:eol-style</h5>
+
+<p>行结束字符串，一般设置为 native，这样 Subversion 会基于当前运行的操作系统来设置行结束符。</p>
+
+<h5>svn:keywords</h5>
+
+<p>用于关键字替换，$Id$、$Revision$、$Date$、$Author$ 等。</p>
+
+<h5>svn:mime-type</h5>
+
+<p>用于设置资源文件的 mime type，这样就可以直接在浏览器中查看 HTML、图片等。</p>
+
+<h3>配置方法</h3>
+
+<p>在类 Unix 的平台上，该文件位于 ~/.subversion 目录下。
+在 Windows 平台上，该文件位于 C:\Documents and Settings&lt;user>\Application Data\Subversion 目录下。其中 user 为安装 Subversion 的用户。</p>
+
+<p>找到 &#8220;config&#8221; 文件后，将 enable-auto-props 设置为 true，并在文件最末尾添加如下内容：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*.c = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.cpp = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.h = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.java = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.clj = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.scala = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.cs = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.php  = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.rb  = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.py  = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.jsp  = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.properties = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.ini = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.txt  = svn:keywords=Id Author Revision Rev Date;svn:eol-style=native
+</span><span class='line'>*.html = svn:keywords=Id Author Revision Rev Date;svn:mime-type=text/html
+</span><span class='line'>*.htm = svn:keywords=Id Author Revision Rev Date;svn:mime-type=text/html
+</span><span class='line'>*.xml = svn:keywords=Id Author Revision Rev Date;svn:mime-type=text/xml
+</span><span class='line'>*.js = svn:keywords=Id Author Revision Rev Date;svn:mime-type=text/javascript
+</span><span class='line'>*.css = svn:keywords=Id Author Revision Rev Date;svn:mime-type=text/css
+</span><span class='line'>*.gif = svn:mime-type=image/gif
+</span><span class='line'>*.png = svn:mime-type=image/png
+</span><span class='line'>*.jpg = svn:mime-type=image/jpeg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>需要注意的是，这样设置只对新提交的文件生效。对于已经提交的文件，仍然需要手工设置属性。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[搭建 Octopress 笔记]]></title>
+    <link href="http://akuma.github.com/blog/2011/12/01/da-jian-octopressbi-ji/"/>
+    <updated>2011-12-01T23:36:00+08:00</updated>
+    <id>http://akuma.github.com/blog/2011/12/01/da-jian-octopressbi-ji</id>
+    <content type="html"><![CDATA[<p>关于 Octopress 的搭建步骤，虽然网上资料不少，但还是写出来备忘一下。</p>
+
+<h3>安装 RVM</h3>
+
+<p>选择多用户安装，默认安装到 /usr/local/rvm 目录下：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo bash &lt; &lt;<span class="o">(</span>curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer<span class="o">)</span>
+</span><span class='line'><span class="nv">$ </span>sudo rvm install 1.9.2 <span class="o">&amp;&amp;</span> rvm use 1.9.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>安装 Octopress</h3>
+
+<p>先执行：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>octopress
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在提示是否加载当前目录下的 .rvmrc 文件时输入 y。
+继续执行命令：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo gem install bundler
+</span><span class='line'><span class="nv">$ </span>sudo bundle install
+</span><span class='line'><span class="nv">$ </span>rake install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>发布到 Github Pages</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rake setup_github_pages
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>根据提示输入 Github Pages 的代码库地址。</p>
+
+<p>生成静态页面并发布到 Github Pages:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rake generate
+</span><span class='line'><span class="nv">$ </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后，将源代码提交到 Github:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git add .
+</span><span class='line'><span class="nv">$ </span>git commit -m <span class="s1">&#39;First Octopress commit.&#39;</span>
+</span><span class='line'><span class="nv">$ </span>git push origin <span class="nb">source</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hello, Octopress!]]></title>
+    <link href="http://akuma.github.com/blog/2011/11/30/hello/"/>
+    <updated>2011-11-30T01:16:00+08:00</updated>
+    <id>http://akuma.github.com/blog/2011/11/30/hello</id>
+    <content type="html"><![CDATA[<p>用 Octopress 搭建 blog 成功，使用起来感觉不错。</p>
+
+<h3>测试一下代码显示</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='common-lisp'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">hello-octopress</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">format</span> <span class="no">t</span> <span class="s">&quot;Hello, Octopres!&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
 </feed>
