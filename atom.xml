@@ -4,7 +4,7 @@
   <title><![CDATA[Akuma's Blog]]></title>
   <link href="http://akuma.github.com/atom.xml" rel="self"/>
   <link href="http://akuma.github.com/"/>
-  <updated>2012-11-18T15:55:07+08:00</updated>
+  <updated>2012-11-18T16:29:45+08:00</updated>
   <id>http://akuma.github.com/</id>
   <author>
     <name><![CDATA[Akuma]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Spring MVC 的 response content-type 问题]]></title>
+    <link href="http://akuma.github.com/blog/2012/11/18/spring-mvc-de-response-content-type-wen-ti/"/>
+    <updated>2012-11-18T16:14:00+08:00</updated>
+    <id>http://akuma.github.com/blog/2012/11/18/spring-mvc-de-response-content-type-wen-ti</id>
+    <content type="html"><![CDATA[<p>如果你使用 Spring MVC 写了一个 Ajax 接口，返回的数据是 json 格式，那么你可能会遇到在 IE 下请求该接口会出现一个文件下载框的问题。</p>
+
+<p>之所以会产生这个问题，是因为如果采用 Spring 默认的配置，json 响应的 content-type 是 application/json，而 IE 10 以前的浏览器对于这个类型是作为文件下载的。解决方法是只要将返回响应的 content-type 改为text/plain 即可。</p>
+
+<p>如果你使用了 &lt;mvc:annotation-driven /&gt;，那么修改起来比较简单：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;mvc:annotation-driven conversion-service="conversionService"
+</span><span class='line'>    ignoreDefaultModelOnRedirect="true"&gt;
+</span><span class='line'>    &lt;mvc:message-converters register-defaults="false"&gt;
+</span><span class='line'>        &lt;bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" /&gt;
+</span><span class='line'>        &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
+</span><span class='line'>            &lt;property name="supportedMediaTypes" value="text/plain;charset=UTF-8" /&gt;
+</span><span class='line'>        &lt;/bean&gt;
+</span><span class='line'>        &lt;bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"&gt;
+</span><span class='line'>            &lt;property name="supportedMediaTypes" value="text/plain;charset=UTF-8" /&gt;
+</span><span class='line'>        &lt;/bean&gt;
+</span><span class='line'>    &lt;/mvc:message-converters&gt;
+</span><span class='line'>&lt;/mvc:annotation-driven&gt;</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SVN Auto Props 配置]]></title>

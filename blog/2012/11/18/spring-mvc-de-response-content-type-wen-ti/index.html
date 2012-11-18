@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Akuma's Blog</title>
+  <title>Spring MVC 的 response content-type 问题 - Akuma's Blog</title>
   <meta name="author" content="Akuma">
 
   
-  <meta name="description" content="Blog Archive 2012 Spring MVC 的 response content-type 问题
-Nov 18 2012 SVN Auto Props 配置
-Nov 12 2012 2011 搭建 Octopress 笔记
-Dec 01 2011 Hello, Octopress &hellip;">
+  <meta name="description" content="如果你使用 Spring MVC 写了一个 Ajax 接口，返回的数据是 json 格式，那么你可能会遇到在 IE 下请求该接口会出现一个文件下载框的问题。 之所以会产生这个问题，是因为如果采用 Spring 默认的配置，json 响应的 content-type 是 application/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ Dec 01 2011 Hello, Octopress &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akuma.github.com/blog/archives/">
+  <link rel="canonical" href="http://akuma.github.com/blog/2012/11/18/spring-mvc-de-response-content-type-wen-ti/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -66,64 +63,110 @@ Dec 01 2011 Hello, Octopress &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Spring MVC 的 Response Content-type 问题</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-18T16:14:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>如果你使用 Spring MVC 写了一个 Ajax 接口，返回的数据是 json 格式，那么你可能会遇到在 IE 下请求该接口会出现一个文件下载框的问题。</p>
 
-  
-  <h2>2012</h2>
+<p>之所以会产生这个问题，是因为如果采用 Spring 默认的配置，json 响应的 content-type 是 application/json，而 IE 10 以前的浏览器对于这个类型是作为文件下载的。解决方法是只要将返回响应的 content-type 改为text/plain 即可。</p>
 
-<article>
-  
-<h1><a href="/blog/2012/11/18/spring-mvc-de-response-content-type-wen-ti/">Spring MVC 的 response content-type 问题</a></h1>
-<time datetime="2012-11-18T16:14:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>18</span> <span class='year'>2012</span></time>
+<p>如果你使用了 &lt;mvc:annotation-driven /&gt;，那么修改起来比较简单：</p>
 
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/11/12/svn-auto-props-pei-zhi/">SVN Auto Props 配置</a></h1>
-<time datetime="2012-11-12T19:20:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>12</span> <span class='year'>2012</span></time>
-
-
-</article>
-
-
-
-  
-  <h2>2011</h2>
-
-<article>
-  
-<h1><a href="/blog/2011/12/01/da-jian-octopressbi-ji/">搭建 Octopress 笔记</a></h1>
-<time datetime="2011-12-01T23:36:00+08:00" pubdate><span class='month'>Dec</span> <span class='day'>01</span> <span class='year'>2011</span></time>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2011/11/30/hello/">Hello, Octopress!</a></h1>
-<time datetime="2011-11-30T01:16:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>30</span> <span class='year'>2011</span></time>
-
-
-</article>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;mvc:annotation-driven conversion-service="conversionService"
+</span><span class='line'>    ignoreDefaultModelOnRedirect="true"&gt;
+</span><span class='line'>    &lt;mvc:message-converters register-defaults="false"&gt;
+</span><span class='line'>        &lt;bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" /&gt;
+</span><span class='line'>        &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
+</span><span class='line'>            &lt;property name="supportedMediaTypes" value="text/plain;charset=UTF-8" /&gt;
+</span><span class='line'>        &lt;/bean&gt;
+</span><span class='line'>        &lt;bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"&gt;
+</span><span class='line'>            &lt;property name="supportedMediaTypes" value="text/plain;charset=UTF-8" /&gt;
+</span><span class='line'>        &lt;/bean&gt;
+</span><span class='line'>    &lt;/mvc:message-converters&gt;
+</span><span class='line'>&lt;/mvc:annotation-driven&gt;</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Akuma</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-18T16:14:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akuma.github.com/blog/2012/11/18/spring-mvc-de-response-content-type-wen-ti/" data-via="iakuma" data-counturl="http://akuma.github.com/blog/2012/11/18/spring-mvc-de-response-content-type-wen-ti/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/11/12/svn-auto-props-pei-zhi/" title="Previous Post: SVN Auto Props 配置">&laquo; SVN Auto Props 配置</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

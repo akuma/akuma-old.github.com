@@ -9,7 +9,7 @@
   <meta name="author" content="Akuma">
 
   
-  <meta name="description" content="常用的 Property svn:eol-style 行结束字符串，一般设置为 native，这样 Subversion 会基于当前运行的操作系统来设置行结束符。 svn:keywords 用于关键字替换，$Id$、$Revision$、$Date$、$Author$ 等。 svn:mime- &hellip;">
+  <meta name="description" content="如果你使用 Spring MVC 写了一个 Ajax 接口，返回的数据是 json 格式，那么你可能会遇到在 IE 下请求该接口会出现一个文件下载框的问题。 之所以会产生这个问题，是因为如果采用 Spring 默认的配置，json 响应的 content-type 是 application/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/18/spring-mvc-de-response-content-type-wen-ti/">Spring MVC 的 Response Content-type 问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-18T16:14:00+08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>如果你使用 Spring MVC 写了一个 Ajax 接口，返回的数据是 json 格式，那么你可能会遇到在 IE 下请求该接口会出现一个文件下载框的问题。</p>
+
+<p>之所以会产生这个问题，是因为如果采用 Spring 默认的配置，json 响应的 content-type 是 application/json，而 IE 10 以前的浏览器对于这个类型是作为文件下载的。解决方法是只要将返回响应的 content-type 改为text/plain 即可。</p>
+
+<p>如果你使用了 &lt;mvc:annotation-driven /&gt;，那么修改起来比较简单：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;mvc:annotation-driven conversion-service="conversionService"
+</span><span class='line'>    ignoreDefaultModelOnRedirect="true"&gt;
+</span><span class='line'>    &lt;mvc:message-converters register-defaults="false"&gt;
+</span><span class='line'>        &lt;bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" /&gt;
+</span><span class='line'>        &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
+</span><span class='line'>            &lt;property name="supportedMediaTypes" value="text/plain;charset=UTF-8" /&gt;
+</span><span class='line'>        &lt;/bean&gt;
+</span><span class='line'>        &lt;bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"&gt;
+</span><span class='line'>            &lt;property name="supportedMediaTypes" value="text/plain;charset=UTF-8" /&gt;
+</span><span class='line'>        &lt;/bean&gt;
+</span><span class='line'>    &lt;/mvc:message-converters&gt;
+</span><span class='line'>&lt;/mvc:annotation-driven&gt;</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -323,6 +389,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/18/spring-mvc-de-response-content-type-wen-ti/">Spring MVC 的 response content-type 问题</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/11/12/svn-auto-props-pei-zhi/">SVN Auto Props 配置</a>
