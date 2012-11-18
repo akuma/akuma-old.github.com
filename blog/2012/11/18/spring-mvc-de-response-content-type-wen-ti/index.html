@@ -96,7 +96,7 @@
 
 <p>如果你使用了 &lt;mvc:annotation-driven /&gt;，那么修改起来比较简单：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -107,19 +107,18 @@
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;mvc:annotation-driven conversion-service="conversionService"
-</span><span class='line'>    ignoreDefaultModelOnRedirect="true"&gt;
-</span><span class='line'>    &lt;mvc:message-converters register-defaults="false"&gt;
-</span><span class='line'>        &lt;bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" /&gt;
-</span><span class='line'>        &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
-</span><span class='line'>            &lt;property name="supportedMediaTypes" value="text/plain;charset=UTF-8" /&gt;
-</span><span class='line'>        &lt;/bean&gt;
-</span><span class='line'>        &lt;bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"&gt;
-</span><span class='line'>            &lt;property name="supportedMediaTypes" value="text/plain;charset=UTF-8" /&gt;
-</span><span class='line'>        &lt;/bean&gt;
-</span><span class='line'>    &lt;/mvc:message-converters&gt;
-</span><span class='line'>&lt;/mvc:annotation-driven&gt;</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;mvc:annotation-driven&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;mvc:message-converters</span> <span class="na">register-defaults=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.springframework.http.converter.ByteArrayHttpMessageConverter&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;supportedMediaTypes&quot;</span> <span class="na">value=</span><span class="s">&quot;text/plain;charset=UTF-8&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.springframework.http.converter.json.MappingJacksonHttpMessageConverter&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;supportedMediaTypes&quot;</span> <span class="na">value=</span><span class="s">&quot;text/plain;charset=UTF-8&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/mvc:message-converters&gt;</span>
+</span><span class='line'><span class="nt">&lt;/mvc:annotation-driven&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
